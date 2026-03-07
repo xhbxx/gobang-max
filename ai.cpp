@@ -1,4 +1,5 @@
 ﻿#include"ai.h"
+
 int attack = 0;
 vector<pair<string,double>> score = {
 	{"11111",20000000},
@@ -76,10 +77,10 @@ int dirs[8][2] = {
 	{1, -1},   // 左下
 	{1, 1}     // 右下
 };
-
+int position[15][15] = {0};
 
 void aiMove(int depth, int realboard[15][15], int aiColor)
-{	
+{
 	if(cot<5)
 	{
 		bool con=start();
@@ -88,6 +89,7 @@ void aiMove(int depth, int realboard[15][15], int aiColor)
 			return;
 		}
 	}
+	moverange();
 	int flexible = 0;
 	int newflexible = 0;
 	int r = 0;
@@ -100,10 +102,11 @@ void aiMove(int depth, int realboard[15][15], int aiColor)
 	{
 		for (int j = 0; j < 15; j++)
 		{
-			if (realboard[i][j] != 0)
+			if (position[i][j] == 0)
 			{
 				continue;
 			}
+			position[i][j] -= 1;
 			realboard[i][j] = aiColor;
 			cout << i << " " << j<<" ";
 			double a = minmax(depth, realboard, playerColor, i, j, alpha, beta);
@@ -373,36 +376,33 @@ bool checkposition(string position, vector<string> model)
 	return false;
 }
 
-//vector<pair<int, int>> moverange(int board[15][15])
-//{
-//	vector<pair<int, int>> range;
-//	bool visited[15][15] = { false };  // 用于去重
-//	for (int i = 0; i < 15; i++)
-//	{
-//		for (int j = 0; j < 15; j++)
-//		{
-//			if (board[i][j] == 0)
-//			{
-//				continue;
-//			}
-//			// 搜索周围两格范围内的所有位置
-//			for (int di = -2; di <= 2; di++)
-//			{
-//				for (int dj = -2; dj <= 2; dj++)
-//				{
-//					int ni = i + di;
-//					int nj = j + dj;
-//					if (ni >= 0 && ni < 15 && nj >= 0 && nj < 15 && board[ni][nj] == 0 && !visited[ni][nj])
-//					{
-//						range.emplace_back(ni, nj);
-//						visited[ni][nj] = true;
-//					}
-//				}
-//			}
-//		}
-//	}
-//	return range;
-//}
+void moverange()
+{	
+
+	for (int i = 0; i < 15; i++)
+	{
+		for (int j = 0; j < 15; j++)
+		{
+			if (Board[i][j] == 0)
+			{
+				continue;
+			}
+			// 搜索周围两格范围内的所有位置
+			for (int di = -2; di <= 2; di++)
+			{
+				for (int dj = -2; dj <= 2; dj++)
+				{
+					int ni = i + di;
+					int nj = j + dj;
+					if (ni >= 0 && ni < 15 && nj >= 0 && nj < 15 && Board[ni][nj] == 0 )
+					{
+						position[ni][nj] = 1;
+					}
+				}
+			}
+		}
+	}
+}
 void show()
 {
 	for (int i = 0; i < 15; i++)
