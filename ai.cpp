@@ -78,10 +78,27 @@ int dirs[8][2] = {
 	{1, 1}     // 右下
 };
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 
 void aiMove(int depth, int realboard[15][15], int aiColor)
 {	
+=======
+int position[15][15] = {0};
+int killi=0,killj=0;
+struct Point {
+	int y, x;
+	int priority; 
+	bool operator<(const Point& other) const {
+		return this->priority > other.priority;
+	};
+};
+// 排序规则：分数高的排在 vector 前面
+
+void aiMove(int depth, int Color)
+{
+	
+>>>>>>> Stashed changes
 =======
 int position[15][15] = {0};
 int killi=0,killj=0;
@@ -107,7 +124,10 @@ void aiMove(int depth, int Color)
 		}
 	}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 	/*f (cot > 5)
 	{
 		bool a=evaluatekill(3);
@@ -124,6 +144,9 @@ void aiMove(int depth, int Color)
 			return;
 		};		
 	}*/
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 	int flexible = 0;
 	int newflexible = 0;
@@ -144,6 +167,7 @@ void aiMove(int depth, int Color)
 		if (a > val)
 		{
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			if (realboard[i][j] != 0)
 			{
 				continue;
@@ -154,6 +178,8 @@ void aiMove(int depth, int Color)
 			cout << a << "a" << val << "val" << endl;
 			if (a > val)
 			{
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 				
